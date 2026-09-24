@@ -47,15 +47,17 @@ CREATE TABLE `layoffs_stage2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-SELECT *
-FROM layoffs_stage2
-WHERE row_num > 1;
-
 INSERT INTO layoffs_stage2
 SELECT *,
 ROW_NUMBER() OVER(
 PARTITION BY company, location, industry, total_laid_off, percentage_laid_off, `date`, stage, country, funds_raised_millions) AS row_num
 FROM layoffs_stage;
+
+
+SELECT *
+FROM layoffs_stage2
+WHERE row_num > 1;
+
 
 DELETE
 FROM layoffs_stage2
