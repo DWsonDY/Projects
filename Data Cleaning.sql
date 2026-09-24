@@ -27,7 +27,7 @@ FROM layoffs_stage
 )
 DELETE *
 FROM CTE_layoff
-WHERE row_num > 1;
+WHERE row_num > 1; ##CAN'T DELETE FROM CTE AS IT'S A READ-ONLY##
 
 
 
